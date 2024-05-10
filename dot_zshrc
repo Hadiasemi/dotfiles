@@ -46,4 +46,4 @@ eval "$(starship init zsh)"
 bindkey -s ^f "tmux-sessionizer\n"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
-source /home/cybersleuth/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/$USER/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
