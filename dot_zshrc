@@ -42,8 +42,26 @@ alias ls="ls --color=auto"
 alias cat='batcat -n'
 alias pandoc="podman run --rm -w /pandoc -v "$(pwd):/pandoc:Z" dalibo/pandocker:stable"
 
+export PATH=~/go/bin:~/.local/bin:$PATH
+
+
+
+ranger_cd() {
+    tempfile=$(mktemp)
+    ranger --choosedir="$tempfile" "$@"
+    if [[ -f "$tempfile" ]] && [[ $(cat "$tempfile") != "" ]]; then
+        cd "$(cat "$tempfile")"
+    fi
+    rm -f "$tempfile"
+}
+alias r='ranger_cd'
+export EDITOR='nvim'
+
 eval "$(starship init zsh)"
 bindkey -s ^f "tmux-sessionizer\n"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
-source /home/$USER/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+GPG_TTY=$(tty)
+export GPG_TTY
+
+#source /home/$USER/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
